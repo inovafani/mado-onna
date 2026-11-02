@@ -1177,12 +1177,19 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 16px;
   z-index: 2;
 }
 
 .night__caption-text {
   display: inline-block;
   overflow: hidden;
+}
+
+/* A long act title may wrap; the act count never does. */
+.night__caption-text:last-child {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .night__caption-text > span {

@@ -66,9 +66,12 @@ export default function Hero() {
         });
 
         // Scroll away: the picture sinks slower than the page, the copy lifts and fades.
+        // Touch-only devices (iOS especially) scroll natively on the compositor while scrubbed
+        // transforms trail a frame behind, so the picture judders. There, only fade.
+        const touch = ScrollTrigger.isTouch === 1;
         const st = { trigger: root.current, start: "top top", end: "bottom top", scrub: true };
-        gsap.to(".hero__media", { yPercent: 24, ease: "none", scrollTrigger: st });
-        gsap.to(".hero__content", { y: -90, autoAlpha: 0, ease: "none", scrollTrigger: { ...st, end: "60% top" } });
+        if (!touch) gsap.to(".hero__media", { yPercent: 24, ease: "none", scrollTrigger: st });
+        gsap.to(".hero__content", { y: touch ? 0 : -90, autoAlpha: 0, ease: "none", scrollTrigger: { ...st, end: "60% top" } });
         gsap.to(".hero__shade", { opacity: 1.0, backgroundColor: "rgba(10,10,10,.35)", ease: "none", scrollTrigger: st });
 
         return () => {

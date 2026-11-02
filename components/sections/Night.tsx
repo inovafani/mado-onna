@@ -8,7 +8,7 @@ import { Icon } from "@/components/ds";
 
 export default function Night() {
   const root = useRef<HTMLElement>(null);
-  const [act, setAct] = useState(1);
+  const [act, setAct] = useState(0);
   const first = useRef(true);
   const refreshT = useRef<number | undefined>(undefined);
 
@@ -142,7 +142,7 @@ export default function Night() {
                   key={a.title}
                   src={U(a.img, 1200)}
                   alt={a.title}
-                  loading={i === 1 ? "eager" : "lazy"}
+                  loading={i === 0 ? "eager" : "lazy"}
                 />
               ))}
             </div>
