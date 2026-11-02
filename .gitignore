@@ -22,7 +22,20 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
+.eslintcache
+
+# editors
+.idea/
+*.swp
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# claude code (personal, machine-local)
+.claude/settings.local.json
+CLAUDE.local.md
 
 # debug
 npm-debug.log*
@@ -32,6 +45,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
