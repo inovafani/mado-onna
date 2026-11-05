@@ -69,7 +69,7 @@ export default function GalleryStrip() {
             <div className="media" style={{ aspectRatio: ar }}>
               <div className="media__inner">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={U(id, 800)} alt="" loading="lazy" decoding="async" />
+                <img src={id.startsWith("http") ? id : U(id, 800)} alt="" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

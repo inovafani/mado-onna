@@ -23,7 +23,7 @@ export default function WhatsOn() {
       <PageHero
         size="full"
         xl
-        img={U("1518834107812-67b0b7c58434", 2000)}
+        img={U("1722461079337-1775b8f61137", 2000)}
         alt="A dancer in a flowing dress on a dark stage"
         position="center 30%"
         title={

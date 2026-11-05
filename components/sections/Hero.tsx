@@ -169,9 +169,9 @@ export default function Hero() {
       <div className="hero__content">
         <div className="hero__head">
           <h1 className="hero__title">
-            One address,
+            Dinner to dancing,
             <br />
-            <em className="hero__accent">one long night</em>
+            <em className="hero__accent">all under one roof</em>
           </h1>
         </div>
         <div className="hero__bar">

@@ -44,7 +44,7 @@ const MENUS = {
   show: {
     label: "Show dinner",
     hours: "Thu – Sat · seating 19:30",
-    img: "1518834107812-67b0b7c58434",
+    img: "1722461079337-1775b8f61137",
     title: "Bodrum Nights",
     intro: "Our autumn show dinner: four courses from the Aegean coast, served between acts of dance, live vocals and music. Seating at 19:30, first act at 20:30, finale around 22:15.",
     exp: "show",

@@ -20,7 +20,7 @@ const BELIEFS = [
 
 const SPACES = [
   { name: "The Restaurant", hours: "From 18:00", d: "An à la carte dining room for 180, built around an open charcoal kitchen.", img: "1600565193348-f74bd3c7ccdf" },
-  { name: "The Stage", hours: "Thu – Sat", d: "A performance floor in the centre of the room, so the show happens around you.", img: "1535525153412-5a42439a210d" },
+  { name: "The Stage", hours: "Thu – Sat", d: "A performance floor in the centre of the room, so the show happens around you.", img: "1779149759433-3c850dded024" },
   { name: "The Lounge", hours: "From 21:00", d: "Low sofas, a long marble bar and the signature cocktail list.", img: "1514933651103-005eec06c04b" },
   { name: "The Club", hours: "Wed – Sun", d: "House and afrohouse, a serious sound system and VIP tables with bottle service.", img: "1545128485-c400e7702796" },
   { name: "The Street Bar", hours: "From 16:00", d: "Facing Jl. Pantai Berawa: spritz, mezze and casual bites, no booking needed.", img: "1555939594-58d7cb561ad1" },

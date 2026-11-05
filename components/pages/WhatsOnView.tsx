@@ -45,7 +45,7 @@ type Ev = { dow: string; day: string; mon: string; kind: string; time: string; t
 const E = (dow: string, day: string, mon: string, kind: string, time: string, title: string, desc: string, img: string, exp: Experience, cta: string, limited?: boolean): Ev => ({ dow, day, mon, kind, time, title, desc, img, exp, cta, limited });
 
 const EVENTS: Ev[] = [
-  E("Thu", "05", "Nov", "Show dinner", "19:30", "Bodrum Nights · Premiere", "Opening night of the autumn season, with a welcome glass on the terrace.", "1518834107812-67b0b7c58434", "show", "Book", true),
+  E("Thu", "05", "Nov", "Show dinner", "19:30", "Bodrum Nights · Premiere", "Opening night of the autumn season, with a welcome glass on the terrace.", "1722461079337-1775b8f61137", "show", "Book", true),
   E("Fri", "06", "Nov", "Club", "23:00", "Afrohouse Fridays", "Residents warm up; a guest selector from Tulum closes the night.", "1470225620780-dba8ba36b745", "vip", "VIP table"),
   E("Sat", "07", "Nov", "Show dinner", "19:30", "Bodrum Nights", "Second performance of the season. Late seating flows into the club.", "1495791185843-c73f2269f669", "show", "Book"),
   E("Sun", "08", "Nov", "Day to night", "16:00", "Long Sunday", "Spritz at golden hour, a family-style feast and a sunset set that runs into the evening.", "1555939594-58d7cb561ad1", "dinner", "Book"),

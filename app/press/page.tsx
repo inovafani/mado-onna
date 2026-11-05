@@ -114,7 +114,7 @@ export default function Press() {
             <a className="kit__item" href={ask("photography")} data-item="">
               <span className="kit__visual kit__visual--pair">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={U("1518834107812-67b0b7c58434", 500, 70)} alt="" loading="lazy" />
+                <img src={U("1722461079337-1775b8f61137", 500, 70)} alt="" loading="lazy" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={U("1534080564583-6be75777b70a", 500, 70)} alt="" loading="lazy" />
               </span>

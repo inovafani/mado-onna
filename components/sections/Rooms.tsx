@@ -42,8 +42,8 @@ export default function Rooms() {
               ratio="4/3"
               speed={1}
               style={{ width: "58%" }}
-              src={img("1536935338788-846bb9981813", 700)}
-              alt="A cocktail garnished with dried orange"
+              src={img("1621873495884-845a939892d1", 700)}
+              alt="A Negroni on the bar"
             />
             <div className="room-copy" data-stagger="">
               <Copy
