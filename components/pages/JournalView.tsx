@@ -3,14 +3,14 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { useFlipFilter } from "@/lib/useFlipFilter";
-import { POSTS, JOURNAL_CATS } from "@/lib/journal";
-import { U } from "@/lib/data";
+import type { Post } from "@/lib/journal";
+import { JOURNAL_CATS } from "@/lib/data";
 import { Media } from "@/components/ds";
 import Tabs from "@/components/Tabs";
 
 const matches = (cat: string, f: string) => f === "All" || cat === f;
 
-export default function JournalView() {
+export default function JournalView({ posts: POSTS }: { posts: Post[] }) {
   const root = useRef<HTMLDivElement>(null);
   const [filter, change] = useFlipFilter<string>(root, "All", ".jpost", matches);
   const [featured, ...rest] = POSTS;
@@ -22,7 +22,7 @@ export default function JournalView() {
     <>
       <section className="section-pad">
         <Link href={`/journal/${featured.slug}`} className="wrap feature">
-          <Media ratio="4/3" src={U(featured.img, 1400)} alt="" className="media--hover" loading="eager" />
+          <Media ratio="4/3" src={featured.img} alt={featured.image_alt ?? ""} className="media--hover" loading="eager" />
           <div className="feature__copy">
             <span className="eyebrow" data-fade="16">
               {featured.cat} · {featured.date}
@@ -60,7 +60,7 @@ export default function JournalView() {
                 data-cat={p.cat}
                 style={{ display: grid.includes(p) && matches(p.cat, filter) ? undefined : "none" }}
               >
-                <Media ratio="4/3" src={U(p.img, 800)} alt="" className="media--hover" delay={(i % 3) * 0.1} parallax={0.05} />
+                <Media ratio="4/3" src={p.img} alt={p.image_alt ?? ""} className="media--hover" delay={(i % 3) * 0.1} parallax={0.05} />
                 <span className="eyebrow">
                   {p.cat} · {p.date}
                 </span>

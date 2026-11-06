@@ -25,6 +25,11 @@ const bodoniModa = Bodoni_Moda({
 });
 
 export const metadata: Metadata = {
+  // WhatsApp/Facebook need absolute URLs for og:image; app/opengraph-image.png is picked up automatically.
+  metadataBase: new URL("https://madoonna.com"),
+  // No og:title/description here: subpages would inherit the homepage's. Scrapers fall back to <title>.
+  openGraph: { siteName: "Madò Onnà", type: "website", locale: "en_US" },
+  twitter: { card: "summary_large_image" },
   title: "Madò Onnà · Mediterranean restaurant, show dinner & club in Berawa, Bali",
   description:
     "One address in Berawa, Bali holds a Mediterranean restaurant, a stage, three bars and a club. Come for dinner, stay for the show.",

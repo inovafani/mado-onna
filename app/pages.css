@@ -1905,3 +1905,67 @@ html[data-nav-hidden] .menus__aside {
   margin-top: 4px;
   color: #fff;
 }
+
+/* Journal article body: HTML from the admin rich editor */
+.article__body {
+  font: 400 18px/30px var(--font-sans);
+  color: var(--color-body);
+  text-wrap: pretty;
+}
+
+.article__body > * {
+  margin: 0 0 28px;
+}
+
+.article__body h2,
+.article__body h3 {
+  margin-top: 48px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.4px;
+}
+
+.article__body h2 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.2;
+}
+
+.article__body h3 {
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.article__body ul,
+.article__body ol {
+  padding-left: 24px;
+}
+
+.article__body li + li {
+  margin-top: 8px;
+}
+
+.article__body blockquote {
+  padding-left: 20px;
+  border-left: 1px solid var(--color-body-mid);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.article__body a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article__body img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.article__body .instagram-media {
+  margin: 0 auto 28px !important;
+}

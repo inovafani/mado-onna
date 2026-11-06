@@ -6,18 +6,68 @@ import PageShell from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
 import BookButton from "@/components/BookButton";
 import { Button, Icon, Media } from "@/components/ds";
-import { POSTS } from "@/lib/journal";
-import { U } from "@/lib/data";
+import ArticleExtras from "@/components/ArticleExtras";
+import { getPosts, type Post } from "@/lib/journal";
+import { ACTS, U } from "@/lib/data";
 
-export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getPosts()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/journal/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = POSTS.find((p) => p.slug === slug);
+  const post = (await getPosts()).find((p) => p.slug === slug);
   if (!post) return {};
-  return { title: `${post.title} · Madò Onnà Journal`, description: post.dek };
+  const title = post.meta_title || `${post.title} · Madò Onnà Journal`;
+  const description = post.meta_description || post.dek;
+  const ogTitle = post.og_title || title;
+  const ogDescription = post.og_description || description;
+  const images = post.img ? [{ url: post.img, alt: post.image_alt || post.title }] : undefined;
+  return {
+    title,
+    description,
+    keywords: post.tags.length ? post.tags : undefined,
+    alternates: post.canonical_url ? { canonical: post.canonical_url } : undefined,
+    openGraph: {
+      type: "article",
+      title: ogTitle,
+      description: ogDescription,
+      publishedTime: post.published_at ?? undefined,
+      modifiedTime: post.updated_at ?? undefined,
+      authors: [post.author],
+      images,
+    },
+    twitter: { card: "summary_large_image", title: ogTitle, description: ogDescription, images },
+  };
+}
+
+// FAQ rich results: each H2/H3 is a question, the paragraph straight after it the answer.
+function faq(html: string) {
+  const text = (h: string) => h.replace(/<[^>]+>/g, "").trim();
+  return [...html.matchAll(/<h[23][^>]*>(.*?)<\/h[23]>\s*<p[^>]*>(.*?)<\/p>/gi)]
+    .map((m) => ({ "@type": "Question", name: text(m[1]), acceptedAnswer: { "@type": "Answer", text: text(m[2]) } }))
+    .filter((q) => q.name && q.acceptedAnswer.text)
+    .slice(0, 10);
+}
+
+function jsonLd(post: Post) {
+  const out: object[] = [];
+  if (post.schema_types.includes("Article"))
+    out.push({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.meta_description || post.dek,
+      image: post.img || undefined,
+      datePublished: post.published_at ?? post.created_at,
+      dateModified: post.updated_at ?? post.published_at ?? post.created_at,
+      author: { "@type": post.author === "Madò Onnà" ? "Organization" : "Person", name: post.author },
+      publisher: { "@type": "Organization", name: "Madò Onnà" },
+      keywords: post.tags.join(", ") || undefined,
+    });
+  const questions = post.schema_types.includes("FAQPage") ? faq(post.content ?? "") : [];
+  if (questions.length) out.push({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: questions });
+  return out.map((o) => JSON.stringify(o).replace(/</g, "\\u003c"));
 }
 
 // Every article is prerendered; the boundary only covers the moment a client navigation resolves the slug.
@@ -31,18 +81,20 @@ export default function ArticlePage({ params }: PageProps<"/journal/[slug]">) {
 
 async function Article({ params }: { params: PageProps<"/journal/[slug]">["params"] }) {
   const { slug } = await params;
-  const i = POSTS.findIndex((p) => p.slug === slug);
+  const posts = await getPosts();
+  const i = posts.findIndex((p) => p.slug === slug);
   if (i < 0) notFound();
-  const post = POSTS[i];
-  const next = POSTS[(i + 1) % POSTS.length];
+  const post = posts[i];
+  const next = posts[(i + 1) % posts.length];
+  const acts = ACTS.filter((a) => post.related_acts.includes(a.id));
 
   return (
     // Keyed by slug: moving between articles must remount, since the scroll reveals split and rewrite the DOM.
     <PageShell key={slug} current="journal">
       <PageHero
         size="md"
-        img={U(post.img, 2000)}
-        alt=""
+        img={post.img}
+        alt={post.image_alt ?? ""}
         title={post.title}
         below={
           <div className="article__meta">
@@ -51,21 +103,23 @@ async function Article({ params }: { params: PageProps<"/journal/[slug]">["param
             </Link>
             <span className="eyebrow eyebrow--body">
               {post.cat} · {post.date} · {post.mins}
+              {post.author !== "Madò Onnà" && ` · By ${post.author}`}
             </span>
           </div>
         }
       />
 
+      {jsonLd(post).map((json, n) => (
+        <script key={n} type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />
+      ))}
+      <ArticleExtras slug={post.slug} embeds={!!post.content?.includes("instagram-media")} />
       <article className="sec section-pad">
         <div className="article">
           <p className="article__dek" data-scrub-words="">
             {post.dek}
           </p>
-          {post.body.map((para, n) => (
-            <p key={n} className="article__p" data-fade="">
-              {para}
-            </p>
-          ))}
+          {/* Content is authored only by signed-in admins (RLS), so it is trusted HTML. */}
+          <div className="article__body" data-fade="" dangerouslySetInnerHTML={{ __html: post.content ?? "" }} />
           <div className="article__end" data-fade="">
             <span>Hungry for it?</span>
             <div>
@@ -75,6 +129,31 @@ async function Article({ params }: { params: PageProps<"/journal/[slug]">["param
           </div>
         </div>
       </article>
+
+      {acts.length > 0 && (
+        <section className="sec sec--flush-top section-pad">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2 className="h-md" data-split="lines">
+                Make a night <em className="accent">of it</em>
+              </h2>
+            </div>
+            <div className="jposts">
+              {acts.map((a, n) => (
+                <Link key={a.id} href={a.href} className="jpost post">
+                  <Media ratio="4/3" src={U(a.img, 800)} alt="" className="media--hover" delay={n * 0.1} parallax={0.05} />
+                  <h3>{a.title}</h3>
+                  <p>{a.body}</p>
+                  <span className="line-link">
+                    <span className="line-link__rule" aria-hidden="true" />
+                    <span>{a.cta}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section-pad next-story">
         <Link href={`/journal/${next.slug}`} className="wrap next-story__link">
@@ -88,7 +167,7 @@ async function Article({ params }: { params: PageProps<"/journal/[slug]">["param
               <span>Read · {next.mins}</span>
             </span>
           </div>
-          <Media ratio="16/10" src={U(next.img, 1200)} alt="" className="media--hover" />
+          <Media ratio="16/10" src={next.img} alt={next.image_alt ?? ""} className="media--hover" />
         </Link>
       </section>
     </PageShell>

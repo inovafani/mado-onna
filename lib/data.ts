@@ -15,6 +15,7 @@ export const PLACES = ["Mykonos", "Tulum", "Ibiza", "Dubai", "Bodrum"];
 export const ACTS = [
   {
     time: "16:00",
+    id: "aperitivo",
     title: "Aperitivo at the street bar",
     body: "Spritz, mezze and Mediterranean snacks at our street-facing bar. No booking, just walk up and watch Berawa slow down.",
     img: "1555939594-58d7cb561ad1",
@@ -23,6 +24,7 @@ export const ACTS = [
   },
   {
     time: "18:00",
+    id: "dinner",
     title: "Dinner",
     body: "Refined Mediterranean à la carte, from Puglia to Marrakech by way of the Aegean. Charcoal, citrus, olive oil and plenty to share.",
     img: "1534080564583-6be75777b70a",
@@ -31,6 +33,7 @@ export const ACTS = [
   },
   {
     time: "20:30",
+    id: "show",
     title: "The show",
     body: "Thursday to Saturday, dinner gets a second act: dancers, live vocals and musicians woven through the room between courses.",
     img: "1682839520077-686e4902d19e",
@@ -39,6 +42,7 @@ export const ACTS = [
   },
   {
     time: "22:30",
+    id: "lounge",
     title: "The lounge",
     body: "Lights drop, the cocktail list takes over and the room starts to move. A good moment to order the Onnà Negroni.",
     img: "1434569842867-4d6d1d4d1ef0",
@@ -47,6 +51,7 @@ export const ACTS = [
   },
   {
     time: "00:00",
+    id: "club",
     title: "The club",
     body: "House and afrohouse from Bali residents and guests from Mykonos, Tulum and Ibiza. Doors close at 03:00, the stories last longer.",
     img: "1563784462386-044fd95e9852",
@@ -124,3 +129,5 @@ export const EXPS: Record<
   lounge: { title: "Lounge table", desc: "Cocktails and small plates as the music builds.", meta: "Daily · from 21:00", img: "1434569842867-4d6d1d4d1ef0", days: [0, 1, 2, 3, 4, 5, 6], times: ["21:00", "21:30", "22:00", "22:30", "23:00", "23:30"] },
   vip: { title: "Club VIP table", desc: "Bottle service and a host for the night.", meta: "Wed – Sun · 23:00 – 03:00", img: "1563784462386-044fd95e9852", days: [0, 3, 4, 5, 6], times: ["23:00", "23:30", "00:00", "00:30", "01:00"] },
 };
+
+export const JOURNAL_CATS = ["All", "Kitchen", "Behind the show", "Bar", "People", "Music", "Places"];
