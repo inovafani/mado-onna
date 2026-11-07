@@ -6,8 +6,8 @@ import { Button, Media } from "@/components/ds";
 import { U } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Private hire & weddings · Madò Onnà, Berawa",
-  description: "From a table of twelve to a full buyout for 400. Dinner, a show written for you, and a dance floor to finish.",
+  title: "Private events, birthdays & weddings in Canggu · Madò Onnà",
+  description: "Birthdays, corporate dinners, weddings and full buyouts in Berawa, Canggu. From a table of twelve to 400 guests: dinner, a show written for you, and a dance floor to finish.",
 };
 
 const OCCASIONS = [

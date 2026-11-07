@@ -7,8 +7,8 @@ import { Button, Media } from "@/components/ds";
 import { U } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "What's on · Madò Onnà, Berawa",
-  description: "Bodrum Nights, our autumn show dinner, plus club nights, members' suppers and the weekly rhythm of the house.",
+  title: "Dinner show & club nights in Canggu, Bali · Madò Onnà",
+  description: "Bodrum Nights, our theatrical dinner show Thu–Sat, then DJs, club nights and VIP tables until 03:00 in Berawa, Canggu.",
 };
 
 const FACTS = [

@@ -7,7 +7,7 @@ import { Button, Icon, type IconName } from "@/components/ds";
 import { U } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contact & location · Madò Onnà, Berawa",
+  title: "Contact & location · Madò Onnà, Jl. Pantai Berawa, Canggu",
   description: "Jl. Pantai Berawa, Canggu, Bali. Opening hours, directions and how to reach us.",
 };
 

@@ -5,7 +5,7 @@ import MenusView from "@/components/pages/MenusView";
 import { U } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Menus · Madò Onnà, Berawa",
+  title: "Menus · Mediterranean restaurant & cocktails in Canggu · Madò Onnà",
   description: "À la carte, the Bodrum Nights show dinner, cocktails and the street bar. Italy, Greece, Morocco and Spain, cooked over charcoal.",
 };
 

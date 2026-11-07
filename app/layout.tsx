@@ -30,9 +30,11 @@ export const metadata: Metadata = {
   // No og:title/description here: subpages would inherit the homepage's. Scrapers fall back to <title>.
   openGraph: { siteName: "Madò Onnà", type: "website", locale: "en_US" },
   twitter: { card: "summary_large_image" },
-  title: "Madò Onnà · Mediterranean restaurant, show dinner & club in Berawa, Bali",
+  // Search Console "HTML tag" verification; leave unset if verified via DNS.
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+  title: "Madò Onnà · Mediterranean restaurant, dinner show & club in Berawa, Canggu",
   description:
-    "One address in Berawa, Bali holds a Mediterranean restaurant, a stage, three bars and a club. Come for dinner, stay for the show.",
+    "A Mediterranean restaurant, a dinner show, three bars, VIP tables and a club under one roof in Berawa, Canggu, Bali. Come for dinner, stay for the show.",
   icons: { icon: "/assets/favicon-32.png" },
 };
 
